@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Halloween w Anusie 🎃</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top, #35105c 0%, #13051f 45%, #08030c 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAGŁÓWEK */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "🎃";
+            position: absolute;
+            font-size: 180px;
+            left: 5%;
+            top: 10%;
+            opacity: 0.12;
+            transform: rotate(-15deg);
+        }
+
+        header::after {
+            content: "👻";
+            position: absolute;
+            font-size: 160px;
+            right: 5%;
+            bottom: 10%;
+            opacity: 0.12;
+        }
+
+        .hero {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 9vw, 7rem);
+            color: #ff7518;
+            text-shadow:
+                0 0 10px #ff7518,
+                0 0 30px #ff4500,
+                5px 5px 0 #1b0625;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .date {
+            font-size: 1.5rem;
+            color: #b56cff;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .main-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff7518, #ff3c00);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 0 25px rgba(255, 90, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .main-button:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 40px rgba(255, 90, 0, 0.8);
+        }
+
+        /* NAWIGACJA */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 3, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ff7518;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: block;
+            padding: 18px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #ff7518;
+            color: #16051f;
+        }
+
+        /* SEKCJE */
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        section h2 {
+            text-align: center;
+            color: #ff7518;
+            font-size: 2.7rem;
+            margin-bottom: 45px;
+            text-shadow: 0 0 15px rgba(255, 117, 24, 0.5);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 117, 24, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: #ff7518;
+            box-shadow: 0 15px 40px rgba(255, 117, 24, 0.2);
+        }
+
+        .card h3 {
+            color: #ffae42;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: #ddd;
+            line-height: 1.7;
+        }
+
+        /* ATRAKCJE */
+        .attraction {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.06);
+            padding: 20px;
+            border-radius: 20px;
+            border-left: 5px solid #ff7518;
+        }
+
+        .attraction img {
+            width: 180px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 15px;
+            background: #2a1236;
+        }
+
+        .attraction h3 {
+            color: #ffae42;
+            margin-bottom: 10px;
+        }
+
+        .attraction p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* TRANSPORT */
+        .transport-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            background: rgba(255,255,255,0.06);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            align-items: center;
+        }
+
+        .transport-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 18px;
+            background: #25102f;
+        }
+
+        .transport-card h3 {
+            color: #ff7518;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .transport-card p {
+            color: #ddd;
+            line-height: 1.7;
+        }
+
+        /* FORMULARZ */
+        .form-box {
+            max-width: 650px;
+            margin: auto;
+            background: rgba(255,255,255,0.07);
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,117,24,0.5);
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            color: #ffae42;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 2px solid #442053;
+            background: #16091e;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #ff7518;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff7518, #ff3c00);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.03);
+        }
+
+        #success {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #174d2b;
+            border-radius: 10px;
+            text-align: center;
+            color: #9affb8;
+        }
+
+        /* STOPKA */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #08030c;
+            border-top: 2px solid #ff7518;
+            color: #aaa;
+        }
+
+        footer span {
+            color: #ff7518;
+        }
+
+        /* RESPONSYWNOŚĆ */
+        @media (max-width: 700px) {
+            nav a {
+                padding: 13px 10px;
+                font-size: 0.9rem;
+            }
+
+            .attraction {
+                grid-template-columns: 1fr;
+            }
+
+            .attraction img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .transport-card {
+                grid-template-columns: 1fr;
+            }
+
+            .transport-card img {
+                height: 220px;
+            }
+
+            section {
+                padding: 60px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     STRONA GŁÓWNA
+========================= -->
+
+<header id="start">
+    <div class="hero">
+        <h1>🎃 Halloween w Anusie 👻</h1>
+
+        <h2>
+            Najbardziej odjechane Halloween tej jesieni!
+        </h2>
+
+        <div class="date">
+            📅 30.10
+        </div>
+
+        <p style="color:#ccc; margin-bottom:30px;">
+            📍 Anusin Kolonia
+        </p>
+
+        <a href="#zapisy" class="main-button">
+            🕷️ ZAPISZ SIĘ NA WYDARZENIE
+        </a>
+    </div>
+</header>
+
+
+<!-- =========================
+     MENU
+========================= -->
+
+<nav>
+    <ul>
+        <li><a href="#organizator">👤 Organizator</a></li>
+        <li><a href="#miejsce">📍 Miejsce</a></li>
+        <li><a href="#atrakcje">🎃 Atrakcje</a></li>
+        <li><a href="#transport">🚗 Transport</a></li>
+        <li><a href="#zapisy">📝 Zapisz się</a></li>
+    </ul>
+</nav>
+
+
+<!-- =========================
+     ORGANIZATOR
+========================= -->
+
+<section id="organizator">
+
+    <h2>👤 Organizator</h2>
+
+    <div class="info-grid">
+
+        <div class="card">
+            <h3>🎃 Organizatorem jest</h3>
+            <p>
+                <strong>Jakub Bagiński</strong>
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📅 Data</h3>
+            <p>
+                <strong>30.10</strong>
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🕸️ Charakter imprezy</h3>
+            <p>
+                Halloweenowa impreza pełna atrakcji,
+                motoryzacji, dyń i osiołków.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MIEJSCE
+========================= -->
+
+<section id="miejsce">
+
+    <h2>📍 Miejsce wydarzenia</h2>
+
+    <div class="card" style="text-align:center;">
+
+        <div style="font-size:80px; margin-bottom:20px;">
+            🏚️
+        </div>
+
+        <h3 style="font-size:2rem;">
+            Anusin Kolonia
+        </h3>
+
+        <p>
+            To właśnie tutaj odbędzie się
+            <strong>Halloween w Anusie</strong>.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ATRAKCJE
+========================= -->
+
+<section id="atrakcje">
+
+    <h2>🎃 Atrakcje</h2>
+
+    <div class="attraction">
+
+        <img
+            src="images/dynia.jpg"
+            alt="Halloweenowa dynia"
+        >
+
+        <div>
+            <h3>1. Bagin dyma dynie 🎃</h3>
+
+            <p>
+                Główna halloweenowa atrakcja z udziałem
+                dyni. Będzie strasznie, zabawnie i zdecydowanie
+                nietypowo.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="attraction">
+
+        <img
+            src="images/dynia2.jpg"
+            alt="Dynia halloweenowa"
+        >
+
+        <div>
+            <h3>2. Ola w szoku – Bagin zapina dynie od boku 🎃</h3>
+
+            <p>
+                Kolejna nietypowa konkurencja halloweenowa,
+                podczas której nie zabraknie zaskoczenia
+                i dobrej zabawy.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="attraction">
+
+        <img
+            src="images/osiolek.jpg"
+            alt="Osiołek"
+        >
+
+        <div>
+            <h3>3. Wielkie wyprowadzenie osła 🫏</h3>
+
+            <p>
+                Wielkie halloweenowe wyprowadzenie osła.
+                Przygotujcie się na wyjątkowego uczestnika
+                imprezy!
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="attraction">
+
+        <img
+            src="images/osiolek2.jpg"
+            alt="Osiołek podczas Halloween"
+        >
+
+        <div>
+            <h3>4. Pogoń za osłem 🫏</h3>
+
+            <p>
+                Szalona pogoń za osłem z celem jego
+                przejęcia od Bagina. Kto okaże się szybszy?
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRANSPORT
+========================= -->
+
+<section id="transport">
+
+    <h2>🚗 Transport</h2>
+
+
+    <div class="transport-card">
+
+        <img
+            src="images/seat-leon.jpg"
+            alt="Seat Leon"
+        >
+
+        <div>
+
+            <h3>🚘 Jazda Seatem z Kuzą</h3>
+
+            <p>
+                Halloweenowa przejażdżka Seatem Leonem
+                z Kuzą. Dla fanów motoryzacji i mocnych
+                wrażeń.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="transport-card">
+
+        <div>
+
+            <h3>🏎️ Przejażdżka Alfą z Baginem</h3>
+
+            <p>
+                Druga opcja transportowa to przejażdżka
+                białą Alfą Romeo Giulia 2.0T z Baginem.
+            </p>
+
+        </div>
+
+        <img
+            src="images/alfa-romeo.jpg"
+            alt="Biała Alfa Romeo Giulia 2.0T"
+        >
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ZAPISY
+========================= -->
+
+<section id="zapisy">
+
+    <h2>📝 Zapisz się na wydarzenie</h2>
+
+    <div class="form-box">
+
+        <form id="registrationForm">
+
+            <label for="name">
+                Imię i nazwisko *
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Wpisz imię i nazwisko"
+                required
+            >
+
+
+            <label for="age">
+                Wiek *
+            </label>
+
+            <input
+                type="number"
+                id="age"
+                name="age"
+                min="1"
+                max="120"
+                placeholder="Wpisz swój wiek"
+                required
+            >
+
+
+            <label for="email">
+                E-mail *
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="twoj@email.pl"
+                required
+            >
+
+
+            <label for="phone">
+                Telefon
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Numer telefonu"
+            >
+
+
+            <label for="transportChoice">
+                Wybierz transport
+            </label>
+
+            <select id="transportChoice" name="transport">
+                <option value="">
+                    -- Wybierz opcję --
+                </option>
+
+                <option value="seat">
+                    🚘 Seat Leon z Kuzą
+                </option>
+
+                <option value="alfa">
+                    🏎️ Alfa Romeo Giulia 2.0T z Baginem
+                </option>
+
+                <option value="wlasny">
+                    🚗 Przyjadę własnym transportem
+                </option>
+            </select>
+
+
+            <label for="message">
+                Dodatkowe informacje
+            </label>
+
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Napisz tutaj dodatkowe informacje..."
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+                🎃 ZAPISUJĘ SIĘ!
+            </button>
+
+        </form>
+
+        <div id="success">
+            ✅ Zgłoszenie zostało przygotowane!
+            Do zobaczenia 30.10 w Anusinie Kolonii! 🎃
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STOPKA
+========================= -->
+
+<footer>
+
+    <p>
+        🎃 <span>Halloween w Anusie</span> 👻
+    </p>
+
+    <p style="margin-top:10px;">
+        Organizator: Jakub Bagiński | 30.10 | Anusin Kolonia
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    const form = document.getElementById("registrationForm");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        success.style.display = "block";
+
+        form.reset();
+
+        success.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
